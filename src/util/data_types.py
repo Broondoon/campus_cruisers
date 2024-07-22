@@ -16,13 +16,13 @@ class Nodes:
     x = None
     y = None
 
-    __init__(id, coordinate):
+    def __init__(self, id, coordinate):
         self.id = id
         self.xy = coordinate
 
 
 
-def defineNode:
+def defineNode():
     CLE = (0,48.46385902698279, -123.31022982698542)
     DTB = (1, 48.465078386216554, -123.31387649906908)
     ECS = (2, 48.46113617040822, -123.31144840329222)
@@ -87,13 +87,13 @@ def defineNode:
     BG = (61, 48.46467021176951, -123.30950944335464)
     BH = (62, 48.46480296576786, -123.3095157545876)
 
-def createDistTable:
+def createDistTable():
     n = 62
 
-    arr = [[0 for_in range(n)] for_in range(n)]
+    arr = [[0 for _ in range(n)] for _ in range(n)]
 
-    for i to n:
-        for j to n:
+    for i in range(n):
+        for j in range(n):
             arr[i][j] = None
 
     arr[0][35] = arr[35][0] = 48.34
@@ -186,15 +186,6 @@ def createDistTable:
     arr[61][62] = arr[62][61] = 15.23
 
 
-    
-
-    
-
-
-
-    
-
-
-defineNode()
-createDistTable()
-
+def setup_data():
+    defineNode()
+    createDistTable()
