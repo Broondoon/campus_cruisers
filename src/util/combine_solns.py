@@ -6,7 +6,7 @@ Contains methods for crossover and mutation.
 """
 import random
 
-dummy_lookup_table = [0, 0][0, 0]
+# dummy_lookup_table = [0, 0][0, 0]
 
 class Solution():
     nodes = []
@@ -40,13 +40,13 @@ def select_mutation(soln):
 
 
 # TODO: add this to solution class
-def mutate(self, ):
-    
-    soln.replace_node(index, replacement)
+def mutate(self):
+    pass
+    # soln.replace_node(index, replacement)
         
 
-soln = Solution()
-select_mutation(soln)
+# soln = Solution()
+# select_mutation(soln)
         
 
 
