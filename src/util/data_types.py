@@ -11,6 +11,10 @@ We could also update this file to have any/all custom objects/classes.
 class Solution: 
     nodes = ()
 
+    # TODO
+    def __init(self):
+        pass
+
 class Nodes:
     id = None
     x = None
@@ -20,10 +24,17 @@ class Nodes:
         self.id = id
         self.xy = coordinate
 
+    def get_neighbours():
+        pass
+
+class Lookup_Table:
+    pass
 
 
+# Todo: 
 def defineNode():
-    CLE = (0,48.46385902698279, -123.31022982698542)
+    # CLE = (0,48.46385902698279, -123.31022982698542)
+    CLE = Nodes(0, (48.46385902698279, -123.31022982698542))
     DTB = (1, 48.465078386216554, -123.31387649906908)
     ECS = (2, 48.46113617040822, -123.31144840329222)
     A = (3, 48.46137123703085, -123.31186238839109)
@@ -90,6 +101,7 @@ def defineNode():
 def createDistTable():
     n = 62
 
+    # Lookup_Table()
     arr = [[0 for _ in range(n)] for _ in range(n)]
 
     for i in range(n):
@@ -184,6 +196,9 @@ def createDistTable():
     arr[59][61] = arr[61][59] = 21.31
     arr[60][62] = arr[62][60] = 36.67
     arr[61][62] = arr[62][61] = 15.23
+
+    l_table = Lookup_Table(arr)
+    return l_table
 
 
 def setup_data():

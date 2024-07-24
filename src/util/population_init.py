@@ -5,3 +5,8 @@ Handles generating the inital population of solutions. Initially, it should just
 
 """
 # import numpy as np
+
+def init_pop():
+    # call methods within /resources
+    # return a list of Solution objects (i.e. a Generation)
+    pass
