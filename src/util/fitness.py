@@ -1,4 +1,10 @@
-""" For ECE 470 group project. Summer 2024. """
+"""
+fitness.py
+
+Contains the fitness function and terminating condition methods for our genetic algorithm.
+
+For ECE 470 group project. Summer 2024.
+"""
 
 # Takes a solution object and evaluates its fitness.
 # Input: solution object of potential solution, the lookup_table
