@@ -12,6 +12,10 @@ Allows the bundling of files within the /util into a library, which is a nice wa
 # from util.node import class_to_import
 # from util.straightline_distance import class_to_import
 
-import fitness
-import combine_solns
-from data_types import Solution, Nodes
+from .fitness import fitness_check, check_terminate, add_to_history
+# import fitness as fit
+from .combine_solns import select_mutation, mutate
+from .data_types import Solution, Node
+from .parent_selection import select_parents
+from .population_init import init_pop
+# from straightline_distance import 

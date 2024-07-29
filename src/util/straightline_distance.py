@@ -1,4 +1,10 @@
-# import numpy as np
+"""
+straightline_distance.py
+
+Kept for future reference.
+
+"""
+from . import data_types
 
 # Node coordinates
 nodes = {
