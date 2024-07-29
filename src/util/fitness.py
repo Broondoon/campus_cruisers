@@ -5,11 +5,12 @@ Contains the fitness function and terminating condition methods for our genetic 
 
 For ECE 470 group project. Summer 2024.
 """
+from . import data_types
 
 # Takes a solution object and evaluates its fitness.
 # Input: solution object of potential solution, the lookup_table
 # Output: the total distance from start to end of the path
-def fitness(potential_solution, lookup_table):
+def fitness_check(potential_solution, lookup_table):
     # variables used in calculation
     running_sum = 0
     prev = None
@@ -17,11 +18,13 @@ def fitness(potential_solution, lookup_table):
     for node in potential_solution.nodes:
         # add distance from the previous node
         if prev:
-            running_sum += lookup_table[prev.id][node.id]
+            running_sum += lookup_table.array[prev.id][node.id]
         # set the previous node to the current node
         prev = node
     # prepare answer
     total_distance = running_sum
+
+    print("HELLOOOOOOOO")
     # return the calculated finess
     return total_distance
 
@@ -55,7 +58,7 @@ def check_terminate(fitness_history, stagnation_limit, max_dev):
 # Output: an updated list of previous best solutions
 def add_to_history(curr_generation, fitness_history):
     # get the best value from the current generation
-    new_best = min(curr_generation)
+    new_best = min(curr_generation.fitness)
     # add the best value to the start of the history list
     fitness_history.insert(0, new_best)
     # return the history list
