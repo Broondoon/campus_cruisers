@@ -3,23 +3,31 @@ parent_selection.py
 
 
 """
-
-# Tournment selection
-# Input: a list of Solutions (i.e. a generation), size of each tournament, any other params you can think of
-# Output: a list of successful parents
-# Parents are chosen by making several subsets of the generation, so that part can go in another function
-# Nodes chosen to partake in a tournament should be chosen randomly
-def select_parents(generation, subset_size):
-    # something something
-    # loop N times, where N = len(generation) / subset_size
-    # do host_tournament() with subset
-    # add results of host_tournament() to a list or something of the best ones
-    # return parents
-    pass
+import random
 
 # Tournament hosting
-# Input: a subset of of Solutions
-# Output: 
-def host_tournament():
-    pass
+# Input: a subset of of Solutions, and a fitness method
+# Output: the winning Solution
+def host_tournament(soln_subset, fitness_method):
+    return min(soln_subset, key = fitness_method)
 
+# Tournament selection
+def select_parents(generation, subset_size, fitness_method):
+    aspirants = generation[:]
+    parents = []
+    num_tournaments = len(generation) // subset_size
+
+    for _ in range(num_tournaments):
+        subset = random.sample(aspirants, subset_size)
+        aspirants = [soln for soln in aspirants if soln not in subset]
+        
+        winner = host_tournament(subset, fitness_method)
+        parents.append(winner)
+
+    return parents
+
+# Input: list of solutions
+# Output: list of tuples containing paired parents
+def mix_n_mingle(parents):
+    singles = parents[:]
+    while len(parents)

@@ -5,12 +5,12 @@ Contains the fitness function and terminating condition methods for our genetic 
 
 For ECE 470 group project. Summer 2024.
 """
-from . import data_types
+from . import data_types as dt
 
 # Takes a solution object and evaluates its fitness.
 # Input: solution object of potential solution, the lookup_table
 # Output: the total distance from start to end of the path
-def fitness_check(potential_solution, lookup_table):
+def fitness_check(potential_solution: dt.Solution, lookup_table):
     # variables used in calculation
     running_sum = 0
     prev = None
@@ -24,7 +24,6 @@ def fitness_check(potential_solution, lookup_table):
     # prepare answer
     total_distance = running_sum
 
-    print("HELLOOOOOOOO")
     # return the calculated finess
     return total_distance
 
