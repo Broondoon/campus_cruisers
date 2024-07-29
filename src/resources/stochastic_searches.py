@@ -17,12 +17,24 @@ def random_depth_first_search(starting_node, ending_node):
     visited = [starting_node.id]
     # main loop
     while len(node_list) > 0:
-        # if node_list[0] == ending_node, exit loop
+        # check if ending_node found
+        if node_list[0].id == ending_node.id:
+            break
         # get node_list[0] neighbours
+        neighbours = node_list[0].get_neighbours()
         # check if visited
-        # if unvisited, randomly pick one and add to start of node_list and visited
-        # if all visited, removed node_list[0] from node_list
-        break
+        next_node_options = []
+        for node in neighbours:
+            if neighbours.count(node.id) == 0:
+                next_node_options.append(node)
+        # at least one unvisited node
+        if len(next_node_options) > 0:
+            randpick = random.randrange(len(next_node_options))
+            node_list.insert(0, next_node_options[randpick])
+            visited.append(next_node_options[randpick].id)
+        # all neighbours visited
+        else:
+            node_list.pop(0)
     # node_list contains a solution or is empty if ending_node not found
     return node_list
 
