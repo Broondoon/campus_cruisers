@@ -5,15 +5,16 @@ Contains methods for crossover and mutation.
 
 """
 import random
+from . import data_types as dt
 
 # Input: a Solution object, an int representing /100 odds to mutate
 # Output: a pair of Node IDs, the first being the one to replace, and the second being the replacement
 def select_mutation(soln, odds):
-
+    
     if (odds > 100) or (odds < 0):
-        print("Err - invalid % odds; must be within 0-100")
+        print("Err - invalid odds; must be within 0-100")
         return None
-
+    
     nodes = soln.nodes
     could_mutate = []
     # Range is funky so as to skip mutating the first and last nodes
@@ -32,37 +33,36 @@ def select_mutation(soln, odds):
     if len(could_mutate) == 0:
         return None
 
+    # Reminder: [0] is the id of the node to replace
+    # [1] is the list of options to replace it with
+
     # Randomly choose (potentially more than 1, but k = 1 rn so only one)
     node_to_mutate = random.choices(could_mutate, weights=((odds) * len(could_mutate)), k = 1)
 
     print(">> Debug - List of nodes to mutate:", node_to_mutate)
 
+    # replacement_node is a Node object
     replacement_node = node_to_mutate[1][random.randrange(0, len(node_to_mutate[1]))]
 
-    # Reminder: [0] is the id of the node to replace
-    # [1] is the list of options to replace it with
-    return(node_to_mutate[0], replacement_node.id)
+    # Returns the id of the node in position node_to_mutate[0] of the solution path
+    # As well as the id of the 
+    return nodes[node_to_mutate[0]].id, replacement_node.id
 
+def select_crossover(soln_a : dt.Solution, soln_b : dt.Solution):
+    pass
 
-# TODO: add this to solution class
-def mutate(soln, old_id, new_id):
-    
-    # Python list comprehension!
-    # Replaces an old node with a new node
-    #   if that node's ID matches what we want to get rid of
-    #   Else, keeps the old node
-    new_path = [Nodes.get(new_id) if node.id == old_id else node for node in soln]
+    # a_nodes = soln_a.nodes
+    # b_nodes = soln_b.nodes
 
-    new_soln = Solution(new_path)
-    return new_soln
+    # options = []
+    # for i in range(1, len(a_nodes) - 1):
 
-    # soln.replace_node(index, replacement)
-        
+    #     for j in range (1, len(b_nodes) - 1):
 
-# soln = Solution()
-# select_mutation(soln)
-        
+    #         a_neighbours = a_nodes[i].get_neighbours()
+    #         b_neighbours = b_nodes[j].get_neighbours()
 
+    #         if a_nodes[i-1].get_id() in b_neighbours and 
 
     
     

@@ -129,6 +129,11 @@ class Graph:
         # Populate arcs
         self.lookup_table = Lookup_Table()
 
+    # def get_node_by_id(self, id):
+    #     for node in self.all_nodes:
+    #         if node.get_id() == id:
+    #             return node
+
     ### SO! You might be wondering why I have brought defineNodes() into an object
     # It was mainly because I wanted a convenient grouping between the lookup table andd
     #   our data on the nodes and their positions. This should make our life easier.
