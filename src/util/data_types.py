@@ -21,6 +21,9 @@ class Node:
 
         self.soln_parent = parent
 
+    def __str__(self) -> str:
+        return "(" + self.name + " " + self.id + ")" 
+
     def get_id(self):
         return self.id
 
@@ -47,17 +50,48 @@ class Solution:
 
     def __init__(self, nodes, fitness = None):
         self.nodes = nodes
-        self.fitness = fitness
 
-    def set_fitness(self, fitness):
-        self.fitness = fitness
+        if fitness == None:
+            self.fitness = self.fitness_check()
+
+    def __str__(self) -> str:
+        return "<" + self.nodes + ">"
+
+    # Takes a solution object and evaluates its fitness.
+    # Input: solution object of potential solution, the lookup_table
+    # Output: the total distance from start to end of the path
+    def fitness_check(self):
+        # variables used in calculation
+        running_sum = 0
+        prev = None
+        # loop through nodes in solution
+        for node in self.nodes:
+            # add distance from the previous node
+            if prev:
+                running_sum += topography.lookup_table.data[prev.id][node.id]
+            # set the previous node to the current node
+            prev = node
+        # prepare answer
+        total_distance = running_sum
+
+        # return the calculated finess
+        return total_distance
+    
+    def refresh_fitness(self):
+        self.fitness = self.fitness_check()
+
+    def get_fitness(self):
+        if self.fitness is None:
+            self.refresh_fitness()
+        
+        return self.fitness
 
     def mutate(self, new_id, old_id):
-
         # Make a list from an old list
         # But grab a new node instead of one from the old list if the id matches 
         # Otherwise, populate with old nods
         self.nodes = [topography.get_node_by_id(new_id) if node.id == old_id else node for node in self.nodes]
+        self.refresh_fitness()
 
     def crossover(self, partner_soln, path_index):
 
