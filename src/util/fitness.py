@@ -7,6 +7,9 @@ For ECE 470 group project. Summer 2024.
 """
 from . import data_types as dt
 
+
+# Moved to data_types.py
+"""
 # Takes a solution object and evaluates its fitness.
 # Input: solution object of potential solution, the lookup_table
 # Output: the total distance from start to end of the path
@@ -26,6 +29,7 @@ def fitness_check(potential_solution: dt.Solution, lookup_table):
 
     # return the calculated finess
     return total_distance
+"""
 
 
 # Checks if the algorithm should terminate now.
@@ -53,11 +57,11 @@ def check_terminate(fitness_history, stagnation_limit, max_dev):
 
 
 # Adds the current best solution to the solution history. Do before calling check_terminate.
-# Input: list of solutions (curr_generation), list of previous best solutions (fitness_history)
+# Input: list of solutions fitnesses, list of previous best solutions
 # Output: an updated list of previous best solutions
 def add_to_history(curr_generation, fitness_history):
     # get the best value from the current generation
-    new_best = min(curr_generation.fitness)
+    new_best = min(curr_generation)
     # add the best value to the start of the history list
     fitness_history.insert(0, new_best)
     # return the history list
