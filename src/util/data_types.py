@@ -22,7 +22,16 @@ class Node:
         self.soln_parent = parent
 
     def __str__(self) -> str:
-        return "(" + self.name + " " + self.id + ")" 
+        print("(" + self.name + " " + str(self.id) + ")")
+        return "(" + self.name + " " + str(self.id) + ")" 
+    
+    def __eq__(self, value: object) -> bool:
+        print(">>> (compare node!)")
+        
+        if self.id == value.id:
+            return True
+        
+        return False
 
     def get_id(self):
         return self.id
@@ -55,7 +64,21 @@ class Solution:
             self.fitness = self.fitness_check()
 
     def __str__(self) -> str:
-        return "<" + self.nodes + ">"
+        return "<Solution: " + ", ".join(str(node) for node in self.nodes) + ">"
+    
+    def __eq__(self, value: object) -> bool:
+        if len(self.nodes) != len(value.nodes):
+            return False
+        
+        for i in range(len(self.nodes)):
+            if self.nodes[i] != value.nodes[i]:
+                return False
+        
+        print(">>> Compare solution - TRUE!")
+
+        return True
+
+
 
     # Takes a solution object and evaluates its fitness.
     # Input: solution object of potential solution, the lookup_table
@@ -77,9 +100,11 @@ class Solution:
         # return the calculated finess
         return total_distance
     
+    # Update the fitness val by doing a fitness check
     def refresh_fitness(self):
         self.fitness = self.fitness_check()
 
+    # Get the fitness, and if it's None, generate it.
     def get_fitness(self):
         if self.fitness is None:
             self.refresh_fitness()

@@ -17,6 +17,9 @@ if __name__ == "__main__":
     # Population & Encoding
     curr_generation = util.debug_init_pop(POPULATION_SIZE)
 
+    # print("STR TEST:")
+    # print(curr_generation[0])
+
     term_cond = False
     while not term_cond:
         # Selection

@@ -49,20 +49,19 @@ def select_mutation(soln, odds):
     return nodes[node_to_mutate[0]].id, replacement_node.id
 
 def select_crossover(soln_a : dt.Solution, soln_b : dt.Solution):
-    pass
 
-    # a_nodes = soln_a.nodes
-    # b_nodes = soln_b.nodes
+    a_nodes = soln_a.nodes
+    b_nodes = soln_b.nodes
 
-    # options = []
-    # for i in range(1, len(a_nodes) - 1):
+    options = []
+    for i in range(1, len(a_nodes) - 1):
 
-    #     for j in range (1, len(b_nodes) - 1):
+        for j in range (1, len(b_nodes) - 1):
 
-    #         a_neighbours = a_nodes[i].get_neighbours()
-    #         b_neighbours = b_nodes[j].get_neighbours()
+            a_neighbours = a_nodes[i].get_neighbours()
+            b_neighbours = b_nodes[j].get_neighbours()
 
-    #         if a_nodes[i-1].get_id() in b_neighbours and 
+            # if a_nodes[i-1].get_id() in b_neighbours and 
 
     
     
