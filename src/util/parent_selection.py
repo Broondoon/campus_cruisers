@@ -4,6 +4,7 @@ parent_selection.py
 
 """
 import random
+from . import data_types as dt
 
 # Tournament hosting
 # Input: a subset of of Solutions, and a fitness method
@@ -12,18 +13,23 @@ def trial_by_combat(soln_subset):
     return min(soln_subset, key = lambda soln: soln.get_fitness())
 
 # Tournament selection
-def select_parents(generation, subset_size):
+def select_parents(generation : list[dt.Solution], subset_size : int):
     aspirants = generation[:]
     parents = []
     num_tournaments = len(generation) // subset_size
 
-    print("> Tournament begins! Players:", aspirants, "\n")
+    print("> Tournament begins! Players:", len(aspirants), "\n")
 
-    for _ in range(num_tournaments):
-        subset = random.sample(aspirants, subset_size)
-        aspirants = [soln for soln in aspirants if soln not in subset]
+    for i in range(num_tournaments):
+        subset = [] # random.sample(aspirants, subset_size)
+        for _ in range(subset_size):
+            subset.append(aspirants.pop(random.randrange(len(aspirants))))
 
-        print("> Remaining aspirants:", aspirants, "\n")
+        print("Iter:", i, "Subset size:", len(subset))
+
+        # aspirants = [soln for soln in aspirants if soln not in subset]
+
+        print("> Remaining aspirants:", len(aspirants), "\n")
         
         winner = trial_by_combat(subset)
         parents.append(winner)

@@ -6,6 +6,7 @@ Contains the definition for the node() object class.
 We could also update this file to have any/all custom objects/classes.
 
 """
+import numpy as np
 
 class Node:
     name = None
@@ -22,12 +23,13 @@ class Node:
         self.soln_parent = parent
 
     def __str__(self) -> str:
-        print("(" + self.name + " " + str(self.id) + ")")
+        # print("(" + self.name + " " + str(self.id) + ")")
         return "(" + self.name + " " + str(self.id) + ")" 
     
-    def __eq__(self, value: object) -> bool:
-        print(">>> (compare node!)")
-        
+    def __repr__(self) -> str:
+        return self.__str__()
+    
+    def __eq__(self, value: object) -> bool:        
         if self.id == value.id:
             return True
         
@@ -35,17 +37,21 @@ class Node:
 
     def get_id(self):
         return self.id
+    
+    def get_name(self):
+        return self.name
 
     # Returns a list of node objects
     def get_neighbours(self):
-
         # Defining empty list and adding values to it
         neighbour_list = []
-
         row_num = self.id
+        print("getting neighbour from row", row_num)
+        print(topography.lookup_table.data[row_num])
 
         for index, cell in enumerate(topography.lookup_table.data[row_num]):
             if cell is not None:
+                print("Found neighbour:", cell)
                 neighbour_list.append(topography.get_node_by_id(index))
 
         return neighbour_list
@@ -66,6 +72,9 @@ class Solution:
     def __str__(self) -> str:
         return "<Solution: " + ", ".join(str(node) for node in self.nodes) + ">"
     
+    def __repr__(self) -> str:
+        return self.__str__()
+    
     def __eq__(self, value: object) -> bool:
         if len(self.nodes) != len(value.nodes):
             return False
@@ -74,7 +83,7 @@ class Solution:
             if self.nodes[i] != value.nodes[i]:
                 return False
         
-        print(">>> Compare solution - TRUE!")
+        # print(">>> Compare solution - TRUE!")
 
         return True
 
@@ -245,9 +254,14 @@ class Graph:
         self.lookup_table = Lookup_Table()
 
     # Given the id of a node, return the Node object
-    def get_node_by_id(self, id):
+    def get_node_by_id(self, id)  -> Node:
         for index, node in enumerate(self.all_nodes):
             if node.get_id() == id:
+                return self.all_nodes[index]
+            
+    def get_node_by_name(self, name) -> Node:
+        for index, node in enumerate(self.all_nodes):
+            if node.get_name() == name:
                 return self.all_nodes[index]
 
     ### SO! You might be wondering why I have brought defineNodes() into an object
@@ -327,6 +341,17 @@ topography = Graph()
 # print("Row 3 of topography:", topography.lookup_table.data[3])
 
 # test_node = Node("I", 11, (48.46338572867817, -123.31368937765774))
-# print(test_node.get_neighbours())
+# print("" + str(test_node.get_neighbours()))
 
 # print(topography.get_node_by_id(11).name, "= I?")
+
+dtb = topography.get_node_by_name("DTB")
+ecs = topography.get_node_by_name("ECS")
+
+ecs.get_neighbours()
+print("")
+print(topography.lookup_table.data[2])
+
+# print(ecs.get_neighbours())
+# print(topography.lookup_table.data[1])
+
