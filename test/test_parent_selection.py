@@ -1,7 +1,7 @@
-# import sys
-# sys.path.append("C:\\Users\\Broondan\\Documents\\UVic\\campus_cruisers\\src\\util")
-# import parent_selection
-# import population_init
+import sys
+sys.path.append("..")
+from src.util import parent_selection
+from src.util import population_init
 
 # POPULATION_SIZE = 12 # Must be a multiple of TOURNAMENT_SIZE
 # TOURNAMENT_SIZE = 3

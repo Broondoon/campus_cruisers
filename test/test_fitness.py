@@ -3,8 +3,8 @@
 # imports
 import unittest
 import sys
-sys.path.append("../src/")
-import util.fitness as fitness
+sys.path.append("..")
+import src.util.fitness as fitness
 
 
 # test class defs

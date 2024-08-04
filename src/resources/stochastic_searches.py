@@ -8,11 +8,14 @@ Bear!
 """
 
 import random
+import sys
+sys.path.append("..")
+from src.util import data_types as dt
 
 # Based on the randomized depth first search described here:
 # https://en.wikipedia.org/wiki/Maze_generation_algorithm#Iterative_implementation_(with_stack)
 #
-def random_depth_first_search(starting_node, ending_node):
+def random_depth_first_search(starting_node : dt.Node, ending_node: dt.Node):
     # begin at the starting node
     node_list = [starting_node]
     visited = [starting_node.id]

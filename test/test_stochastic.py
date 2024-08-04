@@ -3,8 +3,8 @@
 # imports
 import unittest
 import sys
-sys.path.append("../src/")
-from resources.stochastic_searches import random_depth_first_search
+sys.path.append("..")
+import src.resources.stochastic_searches as search
 
 
 # test class def
@@ -23,11 +23,11 @@ class TestRandomDFS(unittest.TestCase):
     def test_nopath(self):
         startnode = test_node_class("start")
         endnode = test_node_class("end")
-        self.assertEqual([], random_depth_first_search(startnode, endnode))
+        self.assertEqual([], search.random_depth_first_search(startnode, endnode))
 
     def test_onlyonenode(self):
         onenode = test_node_class("start and end")
-        randompath = random_depth_first_search(onenode, onenode)
+        randompath = search.random_depth_first_search(onenode, onenode)
         self.assertEqual(1, len(randompath))
         self.assertEqual(onenode.id, randompath[0].id)
     
@@ -36,7 +36,7 @@ class TestRandomDFS(unittest.TestCase):
         endnode = test_node_class("end")
         startnode.set_neighbours([endnode])
         endnode.set_neighbours([startnode])
-        randompath = random_depth_first_search(startnode, endnode)
+        randompath = search.random_depth_first_search(startnode, endnode)
         self.assertEqual(2, len(randompath))
         self.assertEqual(startnode.id, randompath[0].id)
         self.assertEqual(endnode.id, randompath[1].id)
@@ -48,7 +48,7 @@ class TestRandomDFS(unittest.TestCase):
         startnode.set_neighbours([endnode, wrongwaynode])
         endnode.set_neighbours([startnode])
         wrongwaynode.set_neighbours([startnode])
-        randompath = random_depth_first_search(startnode, endnode)
+        randompath = search.random_depth_first_search(startnode, endnode)
         self.assertEqual(2, len(randompath))
         self.assertEqual(startnode.id, randompath[0].id)
         self.assertEqual(endnode.id, randompath[1].id)
@@ -60,7 +60,7 @@ class TestRandomDFS(unittest.TestCase):
         startnode.set_neighbours([endnode, extranode])
         endnode.set_neighbours([startnode, extranode])
         extranode.set_neighbours([startnode, endnode])
-        randompath = random_depth_first_search(startnode, endnode)
+        randompath = search.random_depth_first_search(startnode, endnode)
         pathlen = len(randompath)
         self.assertEqual(True, (pathlen == 2) or (pathlen == 3))
         self.assertEqual(startnode.id, randompath[0].id)
