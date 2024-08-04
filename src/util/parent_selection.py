@@ -13,7 +13,7 @@ def trial_by_combat(soln_subset):
     return min(soln_subset, key = lambda soln: soln.get_fitness())
 
 # Tournament selection
-def select_parents(generation : list[dt.Solution], subset_size : int):
+def select_parents(generation : "list[dt.Solution]", subset_size : int):
     aspirants = generation[:]
     parents = []
     num_tournaments = len(generation) // subset_size

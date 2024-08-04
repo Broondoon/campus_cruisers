@@ -9,8 +9,8 @@ Bear!
 
 import random
 import sys
-sys.path.append("..")
-from src.util import data_types as dt
+sys.path.append("../src")
+from util import data_types as dt
 
 # Based on the randomized depth first search described here:
 # https://en.wikipedia.org/wiki/Maze_generation_algorithm#Iterative_implementation_(with_stack)
