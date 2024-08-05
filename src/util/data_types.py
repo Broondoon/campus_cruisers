@@ -23,7 +23,6 @@ class Node:
         self.soln_parent = parent
 
     def __str__(self) -> str:
-        # print("(" + self.name + " " + str(self.id) + ")")
         return "(" + self.name + " " + str(self.id) + ")" 
     
     def __repr__(self) -> str:
@@ -46,12 +45,9 @@ class Node:
         # Defining empty list and adding values to it
         neighbour_list = []
         row_num = self.id
-        print("getting neighbour from row", row_num)
-        print(topography.lookup_table.data[row_num])
 
         for index, cell in enumerate(topography.lookup_table.data[row_num]):
             if cell is not None:
-                print("Found neighbour:", cell)
                 neighbour_list.append(topography.get_node_by_id(index))
 
         return neighbour_list
@@ -70,7 +66,7 @@ class Solution:
             self.fitness = self.fitness_check()
 
     def __str__(self) -> str:
-        return "<Solution: " + ", ".join(str(node) for node in self.nodes) + ">"
+        return "<Solution: " + ", ".join(str(node) for node in self.nodes) + ">\n"
     
     def __repr__(self) -> str:
         return self.__str__()
@@ -83,11 +79,7 @@ class Solution:
             if self.nodes[i] != value.nodes[i]:
                 return False
         
-        # print(">>> Compare solution - TRUE!")
-
         return True
-
-
 
     # Takes a solution object and evaluates its fitness.
     # Input: solution object of potential solution, the lookup_table
@@ -153,6 +145,7 @@ class Lookup_Table:
 
         arr[0][35] = arr[35][0] = 48.34
         arr[0][55] = arr[55][0] = 53.83
+        arr[2][3] = arr[3][2] = 10.72
         arr[3][4] = arr[4][3] = 81.52
         arr[3][49] = arr[49][3] = 87.76
         arr[4][5] = arr[5][4] = 68.59
@@ -345,13 +338,11 @@ topography = Graph()
 
 # print(topography.get_node_by_id(11).name, "= I?")
 
-dtb = topography.get_node_by_name("DTB")
-ecs = topography.get_node_by_name("ECS")
+# dtb = topography.get_node_by_name("DTB")
+# ecs = topography.get_node_by_name("ECS")
 
-ecs.get_neighbours()
-print("")
-print(topography.lookup_table.data[2])
+# ecs.get_neighbours()
+# print("")
+# print(topography.lookup_table.data[2])
 
 # print(ecs.get_neighbours())
-# print(topography.lookup_table.data[1])
-

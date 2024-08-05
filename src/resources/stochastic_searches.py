@@ -44,3 +44,11 @@ def random_depth_first_search(starting_node : dt.Node, ending_node: dt.Node):
     node_list.reverse()
     return node_list
 
+
+def init_stochastic(start_node, end_node, pop_size):
+    population = []
+
+    for _ in range(pop_size):
+        population.append(random_depth_first_search(start_node, end_node))
+
+    return population

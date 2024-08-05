@@ -5,11 +5,12 @@ parent_selection.py
 """
 import random
 from . import data_types as dt
-
+# class1924almost
 # Tournament hosting
 # Input: a subset of of Solutions, and a fitness method
 # Output: the winning Solution
-def trial_by_combat(soln_subset):
+def trial_by_combat(soln_subset : list[dt.Solution]):
+    print("\n\n >>> Soln:   ", soln_subset)
     return min(soln_subset, key = lambda soln: soln.get_fitness())
 
 # Tournament selection

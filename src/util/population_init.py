@@ -6,11 +6,16 @@ Handles generating the inital population of solutions. Initially, it should just
 """
 from . import data_types as dt
 from random import sample as random_sample
+# from .. import resources
 
-def init_pop():
-    # call methods within /resources
-    # return a list of Solution objects (i.e. a Generation)
-    pass
+def init_pop(start_node : dt.Node, end_node : dt.Node, pop_size : int) -> list[dt.Solution]:
+    population = []
+
+    for _ in range(pop_size):
+        pass #population.append(resources.random_depth_first_search(start_node, end_node))
+
+    return population
+    
 
 def debug_init_pop(gen_size):
     generation = []
