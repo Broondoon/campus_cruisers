@@ -5,7 +5,6 @@ parent_selection.py
 """
 import random
 from . import data_types as dt
-# class1924almost
 # Tournament hosting
 # Input: a subset of of Solutions, and a fitness method
 # Output: the winning Solution
