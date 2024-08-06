@@ -8,12 +8,12 @@ from . import data_types as dt
 # Tournament hosting
 # Input: a subset of of Solutions, and a fitness method
 # Output: the winning Solution
-def trial_by_combat(soln_subset : list[dt.Solution]) -> dt.Solution:
+def trial_by_combat(soln_subset : "list[dt.Solution]") -> dt.Solution:
     # print("\n\n >>> Soln:   ", soln_subset)
     return min(soln_subset, key = lambda soln: soln.get_fitness())
 
 # Tournament selection
-def select_parents(generation : "list[dt.Solution]", subset_size : int) -> list[dt.Solution]:
+def select_parents(generation : "list[dt.Solution]", subset_size : int) -> "list[dt.Solution]":
     aspirants = generation[:]
     parents = []
     num_tournaments = len(generation) // subset_size
@@ -41,7 +41,7 @@ def select_parents(generation : "list[dt.Solution]", subset_size : int) -> list[
 
 # Input: list of solutions
 # Output: list of tuples containing paired parents
-def mix_n_mingle(parents : list[dt.Solution]) -> list[tuple[dt.Solution]]:
+def mix_n_mingle(parents : "list[dt.Solution]") -> "list[tuple[dt.Solution]]":
     singles = parents[:]
     matches = []
 

@@ -36,7 +36,7 @@ def fitness_check(potential_solution: dt.Solution, lookup_table):
 # Input: fitness history, max rounds of no change before term, max deviation
 # Ex: check_terminate([82m, 83m, 84m, 82m, 83m], 5, 2)
 # Output: bool
-def check_terminate(fitness_history : list[float], stagnation_limit, max_dev):
+def check_terminate(fitness_history : "list[float]", stagnation_limit, max_dev):
     # check history length
     if len(fitness_history) < stagnation_limit:
         # algorithm has not run long enough to terminate

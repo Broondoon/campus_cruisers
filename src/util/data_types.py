@@ -136,6 +136,10 @@ class Solution:
             # therefore case == "second_cousins"
             new_a_nodes = self.nodes[:index_a+1] + extra_node_list + partner_soln.nodes[index_b:]
             new_b_nodes = partner_soln.nodes[:index_b+1] + extra_node_list + self.nodes[index_a:]
+        
+        # check for loops
+        new_a_nodes = remove_loops(new_a_nodes)
+        new_b_nodes = remove_loops(new_b_nodes)
 
         child_a = Solution(new_a_nodes)
         child_b = Solution(new_b_nodes)
@@ -341,6 +345,31 @@ class Graph:
 
 # This l'il guy is alllll of our data, in one convenient package!
 topography = Graph()
+
+
+# Helper function
+# Finds checks for loops in a list and removes them if found
+# Input: a list
+# Output: a list without loops
+def remove_loops(list_with_loops):
+    loops_present = True
+    working_list = list_with_loops[:]
+    while loops_present:
+        loops_present = False
+        new_list = working_list[:]
+        for node in working_list:
+            if working_list.count(node) > 1:
+                # there is a loop
+                loops_present = True
+                loopstart = working_list.index(node)
+                working_list.reverse()
+                loopend = len(working_list) - 1 - working_list.index(node)
+                working_list.reverse()
+                new_list = working_list[:loopstart] + working_list[loopend:]
+                break
+        working_list = new_list[:]
+    return working_list # but the loops are gone
+
 
 """ Debug code """
 
