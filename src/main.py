@@ -10,9 +10,9 @@ import util.data_types as dt # data_types is somewhat special, as everyone else 
 
 POPULATION_SIZE = 12 # Must be a multiple of TOURNAMENT_SIZE
 TOURNAMENT_SIZE = 3
-MUTATION_ODDS = 100
+MUTATION_ODDS = 88 # Must be < 100?
 MAX_STAGNATION = 3
-MAX_DEV = 15
+MAX_DEV = 77
 SAFETY_BREAK = 15
 START_NODE = dt.topography.get_node_by_name("ECS")
 END_NODE = dt.topography.get_node_by_name("DTB")
@@ -22,7 +22,6 @@ def format_print_gen(generation):
 
     for i in range(len(generation)):
         print(str(generation[i]) + "\n")
-
 
 def format_print_gen_fitness(generation):
     print("Current generation fitness:")
@@ -35,15 +34,19 @@ def format_print_gen_fitness(generation):
 def format_print_comparison(best_of_first, best_of_last):
     print("\n================\n")
     print("FINAL COMPARISON")
-    print("First generation VS last generation")
-    print(best_of_first, "VS", best_of_last)
+    print("First Generation:")
+    print("    - Fitness:", best_of_first.get_fitness())
+    print("    -", best_of_first.nodes)
+    print("Last Generation:")
+    print("    - Fitness:", best_of_last.get_fitness())
+    print("    -", best_of_last.nodes)
 
 # If you're familliar with C, this is basically the main() function.
 if __name__ == "__main__":
     
     # Population & Encoding
     curr_generation = res.init_stochastic(START_NODE, END_NODE, POPULATION_SIZE)
-    best_of_first_gen = min(curr_generation, key = lambda soln: soln.get_fitness()).get_fitness()
+    best_of_first_gen = min(curr_generation, key = lambda soln: soln.get_fitness())
 
     # Initialize our fitness history tracker
     codex_idoneitatem = []
@@ -73,7 +76,7 @@ if __name__ == "__main__":
         for child in children:
             ids = util.select_mutation(child, MUTATION_ODDS)
             if ids is not None:
-                print("-- mutation occurred --")
+                # print("-- mutation occurred --")
                 child.mutate(ids[0], ids[1])
 
         # Add the childs to the current generation
@@ -96,6 +99,5 @@ if __name__ == "__main__":
             print("!!!\n!!!PRESSURE TOO HIGH! EXECUTING EMERGENCY BREAK\n!!!")
             break
 
-    best_of_last_gen = min(curr_generation, key = lambda soln: soln.get_fitness()).get_fitness()
-
+    best_of_last_gen = min(curr_generation, key = lambda soln: soln.get_fitness())
     format_print_comparison(best_of_first_gen, best_of_last_gen)
