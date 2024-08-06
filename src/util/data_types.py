@@ -119,6 +119,9 @@ class Solution:
         self.nodes = [topography.get_node_by_id(new_id) if node.id == old_id else node for node in self.nodes]
         self.refresh_fitness()
 
+    # Input: self, another solution, and an integer index
+    # Output: two child Solutions
+    # TODO: Bear please fix this thank youuuuuuuuuuu
     def crossover(self, partner_soln, path_index):
 
         a_nodes = self.nodes[:path_index] + partner_soln.nodes[path_index:]
@@ -137,7 +140,7 @@ class Lookup_Table:
 
     # Creates and populates a lookup table with our data.
     def createDistTable(self):
-        # n = 62
+
         n = 63 # Added +1 to avoid argument-out-of-range issue on line 115
 
         # Creates a matrix of nxn filled with "None"

@@ -48,22 +48,50 @@ def select_mutation(soln, odds):
     # As well as the id of the 
     return nodes[node_to_mutate[0]].id, replacement_node.id
 
+
+
+# Input: Two solution objects
+# Output: an integer index.
+# OR: call the crossover method, and return the two children from that.
 def select_crossover(soln_a : dt.Solution, soln_b : dt.Solution):
+    pass
 
-    a_nodes = soln_a.nodes
-    b_nodes = soln_b.nodes
+    # Task:
+    # Read over the two solutions
+    # Find possible crossover points
+    # Select by random from potential points
+    # Return the index of that point    
 
-    options = []
-    for i in range(1, len(a_nodes) - 1):
+    # a_nodes = soln_a.nodes
+    # b_nodes = soln_b.nodes
 
-        for j in range (1, len(b_nodes) - 1):
+    # options = []
+    # for i in range(1, len(a_nodes) - 1):
 
-            a_neighbours = a_nodes[i].get_neighbours()
-            b_neighbours = b_nodes[j].get_neighbours()
+    #     for j in range (1, len(b_nodes) - 1):
 
-            # if a_nodes[i-1].get_id() in b_neighbours and 
+    #         a_neighbours = a_nodes[i].get_neighbours()
+    #         b_neighbours = b_nodes[j].get_neighbours()
 
-    
-    
+    #         # if a_nodes[i-1].get_id() in b_neighbours and 
+
+
+
+
+"""
+Scratchwork ---- TODO: delet this
+
+Alpha = [A, B, C, D] 
+
+Beta = [A, X, Y, D]
+
+B -> Y
+X -> C
+
+Therefor, you want to split Alpha on index 2 and Beta on index 1
+
+
+"""
+
         
 
