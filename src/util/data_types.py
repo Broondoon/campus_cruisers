@@ -119,16 +119,26 @@ class Solution:
         self.nodes = [topography.get_node_by_id(new_id) if node.id == old_id else node for node in self.nodes]
         self.refresh_fitness()
 
-    # Input: self, another solution, and an integer index
+    # Input: self, another solution, indecies for crossing over, any extra nodes, and the case
     # Output: two child Solutions
-    # TODO: Bear please fix this thank youuuuuuuuuuu
-    def crossover(self, partner_soln, path_index):
+    def crossover(self, partner_soln, index_a, index_b, extra_node_list, case):
+        if case == "same":
+            # includes start point of from here, ie list[startpoint:]
+            # does Not include end point of until here, ie list[:endpoint]
+            # becuase they are the same
+            new_a_nodes = self.nodes[:index_a] + partner_soln.nodes[index_b:]
+            new_b_nodes = partner_soln.nodes[:index_b] + self.nodes[index_a:]
+        elif case == "first_cousin":
+            # includes both because they are different
+            new_a_nodes = self.nodes[:index_a+1] + partner_soln.nodes[index_b:]
+            new_b_nodes = partner_soln.nodes[:index_b+1] + self.nodes[index_a:]
+        else:
+            # therefore case == "second_cousins"
+            new_a_nodes = self.nodes[:index_a+1] + extra_node_list + partner_soln.nodes[index_b:]
+            new_b_nodes = partner_soln.nodes[:index_b+1] + extra_node_list + self.nodes[index_a:]
 
-        a_nodes = self.nodes[:path_index] + partner_soln.nodes[path_index:]
-        b_nodes = partner_soln.nodes[:path_index] + self.nodes[path_index:]
-
-        child_a = Solution(a_nodes)
-        child_b = Solution(b_nodes)
+        child_a = Solution(new_a_nodes)
+        child_b = Solution(new_b_nodes)
 
         return (child_a, child_b)
 
