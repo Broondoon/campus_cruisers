@@ -42,7 +42,10 @@ def random_depth_first_search(starting_node : dt.Node, ending_node: dt.Node):
     # node_list contains a solution or is empty if ending_node not found
     # reverse before returning because it is backwards
     node_list.reverse()
-    return node_list
+
+    # Built a Solution object from the list of nodes
+    new_soln = dt.Solution(node_list)
+    return new_soln
 
 
 def init_stochastic(start_node, end_node, pop_size):

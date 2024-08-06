@@ -36,7 +36,7 @@ def fitness_check(potential_solution: dt.Solution, lookup_table):
 # Input: fitness history, max rounds of no change before term, max deviation
 # Ex: check_terminate([82m, 83m, 84m, 82m, 83m], 5, 2)
 # Output: bool
-def check_terminate(fitness_history, stagnation_limit, max_dev):
+def check_terminate(fitness_history : list[float], stagnation_limit, max_dev):
     # check history length
     if len(fitness_history) < stagnation_limit:
         # algorithm has not run long enough to terminate
@@ -61,7 +61,8 @@ def check_terminate(fitness_history, stagnation_limit, max_dev):
 # Output: an updated list of previous best solutions
 def add_to_history(curr_generation, fitness_history):
     # get the best value from the current generation
-    new_best = min(curr_generation)
+    new_best = min(curr_generation, key = lambda soln: soln.get_fitness()).get_fitness()
+    # print("NEW BEST", new_best)
     # add the best value to the start of the history list
     fitness_history.insert(0, new_best)
     # return the history list

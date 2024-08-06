@@ -8,37 +8,40 @@ from . import data_types as dt
 # Tournament hosting
 # Input: a subset of of Solutions, and a fitness method
 # Output: the winning Solution
-def trial_by_combat(soln_subset : list[dt.Solution]):
-    print("\n\n >>> Soln:   ", soln_subset)
+def trial_by_combat(soln_subset : list[dt.Solution]) -> dt.Solution:
+    # print("\n\n >>> Soln:   ", soln_subset)
     return min(soln_subset, key = lambda soln: soln.get_fitness())
 
 # Tournament selection
-def select_parents(generation : "list[dt.Solution]", subset_size : int):
+def select_parents(generation : "list[dt.Solution]", subset_size : int) -> list[dt.Solution]:
     aspirants = generation[:]
     parents = []
     num_tournaments = len(generation) // subset_size
 
-    print("> Tournament begins! Players:", len(aspirants), "\n")
+    # print("> Tournament begins! Players:", len(aspirants), "\n")
 
     for i in range(num_tournaments):
         subset = [] # random.sample(aspirants, subset_size)
         for _ in range(subset_size):
             subset.append(aspirants.pop(random.randrange(len(aspirants))))
 
-        print("Iter:", i, "Subset size:", len(subset))
-
-        # aspirants = [soln for soln in aspirants if soln not in subset]
-
-        print("> Remaining aspirants:", len(aspirants), "\n")
+        # print("Iter:", i, "Subset size:", len(subset))
+        # print("> Remaining aspirants:", len(aspirants), "\n")
         
         winner = trial_by_combat(subset)
+
+        # for j in range(len(subset)):
+        #     print("Soln", j, "in subset", i, "'s fitness:", subset[j].get_fitness())
+
+        # print("Winner's fitness:", winner.get_fitness())
+
         parents.append(winner)
 
     return parents
 
 # Input: list of solutions
 # Output: list of tuples containing paired parents
-def mix_n_mingle(parents):
+def mix_n_mingle(parents : list[dt.Solution]) -> list[tuple[dt.Solution]]:
     singles = parents[:]
     matches = []
 
@@ -53,5 +56,5 @@ def mix_n_mingle(parents):
 
         matches.append((soln_a, soln_b))
 
-    print("Pairs:", matches)
+    # print("Pairs:", matches)
     return matches

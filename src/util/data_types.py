@@ -66,7 +66,7 @@ class Solution:
             self.fitness = self.fitness_check()
 
     def __str__(self) -> str:
-        return "<Solution: " + ", ".join(str(node) for node in self.nodes) + ">\n"
+        return "\n<Solution: " + ", ".join(str(node) for node in self.nodes) + ">"
     
     def __repr__(self) -> str:
         return self.__str__()
