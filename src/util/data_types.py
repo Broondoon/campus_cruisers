@@ -112,11 +112,12 @@ class Solution:
         
         return self.fitness
 
-    def mutate(self, new_id, old_id):
+    def mutate(self, old_id, new_id):
         # Make a list from an old list
         # But grab a new node instead of one from the old list if the id matches 
         # Otherwise, populate with old nods
         self.nodes = [topography.get_node_by_id(new_id) if node.id == old_id else node for node in self.nodes]
+        print("NEW MUTATED PATH:\n", self.nodes, sep = "")
         self.refresh_fitness()
 
     # Input: self, another solution, indecies for crossing over, any extra nodes, and the case
@@ -343,10 +344,6 @@ class Graph:
         self.all_nodes.append(Node("BG", 61, (48.46467021176951, -123.30950944335464)))
         self.all_nodes.append(Node("BH", 62, (48.46480296576786, -123.3095157545876)))
 
-# This l'il guy is alllll of our data, in one convenient package!
-topography = Graph()
-
-
 # Helper function
 # Finds checks for loops in a list and removes them if found
 # Input: a list
@@ -370,6 +367,8 @@ def remove_loops(list_with_loops):
         working_list = new_list[:]
     return working_list # but the loops are gone
 
+# This l'il guy is alllll of our data, in one convenient package!
+topography = Graph()
 
 """ Debug code """
 

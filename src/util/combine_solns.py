@@ -68,30 +68,32 @@ def select_crossover(soln_a : dt.Solution, soln_b : dt.Solution):
     # note that extra_node_list will have 0 or 1 nodes
     # note case can be "same" or "first_cousin" or "second_cousin"
     crosspoints = []
-    for node_a, i in soln_a:
+    # a_nodes = soln_a.nodes
+    for i, node_a in enumerate(soln_a.nodes):
         neighbours_a = node_a.get_neighbours()
-        for node_b, j in soln_b:
+        # b_nodes = soln_b.nodes
+        for j, node_b in enumerate(soln_b.nodes):
             neighbours_b = node_b.get_neighbours()
             if node_a == node_b:
                 # the solutions cross paths here
-                crosspoints.append(i, j, [], "same")
+                crosspoints.append((i, j, [], "same"))
             for neighbour_a in neighbours_a:
                 if node_b == neighbour_a:
                     # the solutions are directly next to each other here
-                    crosspoints.append(i, j, [], "first_cousin")
+                    crosspoints.append((i, j, [], "first_cousin"))
                 for neighbour_b in neighbours_b:
                     if neighbour_b == neighbour_a:
                         # the solutions are seperated here by a single node
-                        crosspoints.append(i, j, [neighbour_a], "second_cousin")
+                        crosspoints.append((i, j, [neighbour_a], "second_cousin"))
                         pass
                     if node_a == neighbour_b:
                         # the solutions are directly next to each other here
-                        crosspoints.append(i, j, [], "first_cousin")
+                        crosspoints.append((i, j, [], "first_cousin"))
     num_options = len(crosspoints)
     if num_options == 0:
         # there are no crossover options
         return None
     selection = random.randint(0, num_options)
-    (index_a, index_b, extra_node_list, case) = crosspoints[selection]
+    index_a, index_b, extra_node_list, case = crosspoints[selection]
     return soln_a.crossover(soln_b, index_a, index_b, extra_node_list, case)
 

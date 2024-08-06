@@ -64,13 +64,12 @@ if __name__ == "__main__":
         curr_generation = [soln for soln in curr_generation if soln not in chosen_parents]
 
         # Crossover
-        children = chosen_parents # [] # TODO: enable this
-        # for soln_a, soln_b in chosen_pairs:
-        #     crossover_p1, crossover_p2 = util.select_crossover()
-        #     child_a, child_b = soln_a.crossover(soln_b, crossover_p1, crossover_p2)
+        children = []
+        for soln_a, soln_b in chosen_pairs:
+            child_a, child_b = util.select_crossover(soln_a, soln_b)
 
-        #     children.append(child_a)
-        #     children.append(child_b)
+            children.append(child_a)
+            children.append(child_b)
 
         # Mutation
         for child in children:
