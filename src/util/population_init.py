@@ -8,7 +8,7 @@ from . import data_types as dt
 from random import sample as random_sample
 # from .. import resources
 
-def init_pop(start_node : dt.Node, end_node : dt.Node, pop_size : int) -> list[dt.Solution]:
+def init_pop(start_node : dt.Node, end_node : dt.Node, pop_size : int) -> "list[dt.Solution]":
     population = []
 
     for _ in range(pop_size):
