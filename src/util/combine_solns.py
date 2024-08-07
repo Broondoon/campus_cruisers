@@ -11,7 +11,7 @@ from . import data_types as dt
 # Output: a pair of Node IDs, the first being the one to replace, and the second being the replacement
 def select_mutation(soln, odds):
 
-    print("\nPath under mutation:", soln.nodes)
+    # print("\nPath under mutation:", soln.nodes)
     
     if (odds > 100) or (odds < 0):
         print("Err - invalid odds; must be within 0-100")
@@ -39,7 +39,7 @@ def select_mutation(soln, odds):
 
     # Don't roll the dice if there's nothing to mutate
     if len(could_mutate) == 0:
-        print("No room for mutation along the path...\n\n")
+        # print("No room for mutation along the path...\n\n")
         return None
 
     # Reminder: [0] is the id of the node to replace
@@ -49,15 +49,15 @@ def select_mutation(soln, odds):
     # This currently is hardcoded to only select 1. If you want more, get rid of [0] and add a for loop.
     node_to_mutate = random.choices(could_mutate, k = 1)[0] # weights=([odds] * len(could_mutate)), k = 1)[0]
 
-    print(">> Debug - List of nodes to mutate:", node_to_mutate)
+    # print(">> Debug - List of nodes to mutate:", node_to_mutate)
 
     # replacement_node is a Node object
     replacement_node = node_to_mutate[1][random.randrange(0, len(node_to_mutate[1]))]
 
     # print("ID to replace:", nodes[node_to_mutate[0]].id, "ID of replacement:", replacement_node.id)
 
-    print("Path Before:", nodes[node_to_mutate[0]-2], nodes[node_to_mutate[0]-1], nodes[node_to_mutate[0]], nodes[node_to_mutate[0]+1], nodes[node_to_mutate[0]+2])
-    print("New Mutated Path:" , nodes[node_to_mutate[0]-2], nodes[node_to_mutate[0]-1], replacement_node, nodes[node_to_mutate[0]+1], nodes[node_to_mutate[0]+2])
+    # print("Path Before:", nodes[node_to_mutate[0]-2], nodes[node_to_mutate[0]-1], nodes[node_to_mutate[0]], nodes[node_to_mutate[0]+1], nodes[node_to_mutate[0]+2])
+    # print("New Mutated Path:" , nodes[node_to_mutate[0]-2], nodes[node_to_mutate[0]-1], replacement_node, nodes[node_to_mutate[0]+1], nodes[node_to_mutate[0]+2])
 
     return nodes[node_to_mutate[0]].id, replacement_node.id
 

@@ -7,6 +7,8 @@ The nerve centre of the genetic algorithm. Calls other files.
 import util # A group of imports bundled together via an __init__.py file
 import resources as res
 import util.data_types as dt # data_types is somewhat special, as everyone else relies on them
+import psutil # Library for memory usage checking; you must pip install psutil before using
+import time # Library for time checking
 
 POPULATION_SIZE = 12 # Must be a multiple of TOURNAMENT_SIZE
 TOURNAMENT_SIZE = 3
@@ -35,17 +37,27 @@ def format_print_comparison(best_of_first, best_of_last):
     print("\n================\n")
     print("FINAL COMPARISON")
     print("First Generation:")
-    print("    - Fitness:", best_of_first.get_fitness())
+    print(best_of_first.get_fitness())
     print("    -", best_of_first.nodes)
     print("Last Generation:")
-    print("    - Fitness:", best_of_last.get_fitness())
+    print(best_of_last.get_fitness())
     print("    -", best_of_last.nodes)
 
 # If you're familliar with C, this is basically the main() function.
 if __name__ == "__main__":
+
+    process = psutil.Process()
+    start_time = time.time()
     
     # Population & Encoding
     curr_generation = res.init_stochastic(START_NODE, END_NODE, POPULATION_SIZE)
+
+    print(">>> MEMORY USAGE AFTER STOCHASTIC")
+    print(process.memory_info().rss)  # in bytes 
+
+    print(">>> TIME AFTER STOCHASTIC")
+    print("--- %s seconds ---" % round(time.time() - start_time, 4))
+
     best_of_first_gen = min(curr_generation, key = lambda soln: soln.get_fitness())
 
     # Initialize our fitness history tracker
@@ -85,18 +97,24 @@ if __name__ == "__main__":
         codex_idoneitatem = util.add_to_history(curr_generation, codex_idoneitatem)
 
         print("Algo iter:", safety_valve_pressure)
-        format_print_gen_fitness(curr_generation)
+        # format_print_gen_fitness(curr_generation)
 
         # Terminating Condition
         term_cond = util.check_terminate(codex_idoneitatem, MAX_STAGNATION, MAX_DEV)
         
-        print("Should terminate?", term_cond)
+        # print("Should terminate?", term_cond)
 
         safety_valve_pressure += 1
 
         if safety_valve_pressure > SAFETY_BREAK:
             print("!!!\n!!!PRESSURE TOO HIGH! EXECUTING EMERGENCY BREAK\n!!!")
             break
+
+    print(">>> MEMORY USAGE AFTER GEN ALGO")
+    print(process.memory_info().rss)  # in bytes 
+
+    print(">>> TIME AFTER ALGO")
+    print("--- %s seconds ---" % round(time.time() - start_time, 2))
 
     best_of_last_gen = min(curr_generation, key = lambda soln: soln.get_fitness())
     format_print_comparison(best_of_first_gen, best_of_last_gen)

@@ -117,7 +117,7 @@ class Solution:
         # But grab a new node instead of one from the old list if the id matches 
         # Otherwise, populate with old nods
         self.nodes = [topography.get_node_by_id(new_id) if node.id == old_id else node for node in self.nodes]
-        print("NEW MUTATED PATH:\n", self.nodes, sep = "")
+        # print("NEW MUTATED PATH:\n", self.nodes, sep = "")
         self.refresh_fitness()
 
     # Input: self, another solution, indecies for crossing over, any extra nodes, and the case
